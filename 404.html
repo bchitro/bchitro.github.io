@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BChitro (বিচিত্র)</title>
+<meta name="description" content="BChitro (বিচিত্র): ভিডিও ও শর্টসের প্ল্যাটফর্ম">
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    background: #0a0a0a; color: #f2f2f2;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans Bengali", sans-serif;
+  }
+  main { width: 100%; max-width: 420px; padding: 32px 24px; text-align: center; }
+  h1 { font-size: 44px; margin: 0 0 8px; letter-spacing: 1px; }
+  .g { color: #22c55e; }
+  .r { color: #ef4444; }
+  #msg { font-size: 18px; margin: 0 0 28px; color: #d0d0d0; }
+  .btn {
+    display: block; width: 100%; padding: 14px 16px; margin: 0 0 12px;
+    border-radius: 12px; border: 0; font-size: 17px; font-weight: 600;
+    text-decoration: none; cursor: pointer;
+    background: #ef4444; color: #fff;
+  }
+  .ghost { background: #2a2a2a; color: #f2f2f2; }
+  .hint { font-size: 14px; color: #9a9a9a; line-height: 1.6; margin-top: 20px; }
+</style>
+</head>
+<body>
+<main>
+  <h1><span class="g">B</span><span class="r">Chitro</span></h1>
+  <p id="msg">ভিডিও ও শর্টসের প্ল্যাটফর্ম</p>
+  <a id="open" class="btn" href="#">BChitro অ্যাপে খুলুন</a>
+  <button id="copy" class="btn ghost" type="button">লিংক কপি করুন</button>
+  <p class="hint">অ্যাপে সরাসরি না খুললে লিংকটি কপি করে BChitro অ্যাপের সার্চ বক্সে পেস্ট করুন।<br>অ্যাপ ইনস্টল না থাকলে শীঘ্রই Google Play তে পাবেন।</p>
+</main>
+<script>
+(function () {
+  var path = location.pathname;
+  var m = path.match(/^\/(watch|shorts|c)\/([^\/]+)\/?$/);
+  var kinds = { watch: "একটি ভিডিও", shorts: "একটি শর্টস", c: "একটি চ্যানেল" };
+
+  var msg = document.getElementById("msg");
+  if (m) { msg.textContent = "আপনাকে " + kinds[m[1]] + " শেয়ার করা হয়েছে।"; }
+
+  var fallback = "https://play.google.com/store/apps/details?id=com.mdrubelsha.bchitro";
+
+  document.getElementById("open").href =
+    "intent://" + location.host + path + location.search +
+    "#Intent;scheme=https;package=com.mdrubelsha.bchitro;S.browser_fallback_url=" +
+    encodeURIComponent(fallback) + ";end";
+
+  var copyBtn = document.getElementById("copy");
+  copyBtn.addEventListener("click", function () {
+    var link = location.href;
+    function done() { copyBtn.textContent = "কপি হয়েছে ✓"; }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(link).then(done, function () { window.prompt("লিংক কপি করুন:", link); });
+    } else {
+      window.prompt("লিংক কপি করুন:", link);
+    }
+  });
+})();
+</script>
+</body>
+</html>
