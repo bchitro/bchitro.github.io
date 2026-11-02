@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.mdrubelsha.bchitro",
+      "sha256_cert_fingerprints": [
+        "D3:BB:F9:16:81:89:40:07:BA:32:15:53:B2:C9:1E:A8:FB:53:41:29:C3:B7:45:D8:ED:25:85:F8:63:67:68:F5"
+      ]
+    }
+  }
+]
